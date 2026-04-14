@@ -1,116 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyrus Akacha Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyrus Akacha Portfolio </title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="css/styles.css">
+<style>
+    :root{
+        --bg:#f8fafc;
+        --text:#0f172a;
+        --card:#ffffff;
+        --primary:#1cc88a;
+        --muted:#64748b;
+    }
+
+    [data-theme="dark"]{
+        --bg:#0f172a;
+        --text:#e2e8f0;
+        --card:#1e293b;
+        --primary:#22c55e;
+        --muted:#94a3b8;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Roboto,sans-serif;}
+
+    body{
+        background:var(--bg);
+        color:var(--text);
+        overflow-x:hidden;
+        transition:0.3s ease;
+    }
+
+    header{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        background:var(--card);
+        padding:12px 16px;
+        border-bottom:3px solid var(--primary);
+        z-index:1000;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .brand{
+        font-weight:800;
+        font-size:1.3rem;
+    }
+
+    .brand span{color:var(--primary);}
+
+    .top-actions button{
+        margin-left:10px;
+        padding:6px 10px;
+        border:none;
+        cursor:pointer;
+        border-radius:6px;
+        background:var(--primary);
+        color:white;
+    }
+
+    .hero{
+        margin-top:100px;
+        padding:40px 20px;
+        text-align:center;
+    }
+
+    .hero img{
+        width:140px;
+        height:140px;
+        border-radius:50%;
+        object-fit:cover;
+        border:4px solid var(--primary);
+    }
+
+    .hero h1{margin-top:10px;font-size:2rem;}
+    .hero p{color:var(--muted);margin-top:8px;}
+
+    nav{
+        display:flex;
+        justify-content:center;
+        gap:15px;
+        margin-top:15px;
+    }
+
+    nav a{
+        text-decoration:none;
+        color:var(--text);
+        font-weight:600;
+    }
+
+    section{
+        padding:50px 20px;
+    }
+
+    .section-title{
+        text-align:center;
+        font-size:1.6rem;
+        margin-bottom:20px;
+        color:var(--primary);
+    }
+
+    .projects{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+        gap:20px;
+    }
+
+    .card{
+        background:var(--card);
+        padding:15px;
+        border-radius:12px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        cursor:pointer;
+        transition:0.3s;
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    .card:hover{transform:translateY(-5px);}
+
+    .card a{color:var(--primary);text-decoration:none;}
+
+    .modal{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.6);
+        display:none;
+        justify-content:center;
+        align-items:center;
+        z-index:2000;
+    }
+
+    .modal-content{
+        background:var(--card);
+        padding:20px;
+        border-radius:12px;
+        width:90%;
+        max-width:400px;
+    }
+
+    .close{float:right;cursor:pointer;font-size:20px;}
+
+    footer{
+        text-align:center;
+        padding:20px;
+        color:var(--muted);
+    }
+
+    /* Reveal animation */
+    .reveal{
+        opacity:1 !important;
+        transform:translateY(0) !important;
+        transition:0.8s ease;
+    }
+
+    /* Admin */
+    #adminPanel{
+        display:none;
+        padding:20px;
+        background:var(--card);
+        margin:20px;
+        border-radius:12px;
+    }
+</style>
+
 </head>
-<body>
+<body><header>
+    <div class="brand">Cyrus <span>Akacha</span></div><div class="top-actions">
+    <button onclick="toggleTheme()">🌙</button>
+    <button onclick="openAdmin()">Admin</button>
+</div>
 
-<!-- HEADER -->
-<header class="header">
-    <h1>Cyrus Akacha</h1>
+</header><div class="hero">
+    <img src="assets/images/profile.jpg" alt="Profile">
+    <h1>Hi, I'm Cyrus 👋</h1>
+    <p>Frontend Developer | Python Enthusiast | Designer</p><nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-    <div class="header-controls">
-        <button id="darkToggle">🌙</button>
-    </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-    <h2 id="typing"></h2>
-    <p>Python Developer | Software • Automation • Web</p>
-</section>
-
-<!-- ABOUT -->
-<section class="section fade-in">
-    <h2>About Me</h2>
-    <p>
-        My name is Cyrus Akacha Cyprian, a passionate Python developer specializing in software development, web development, and automation.
-        I began programming in September 2025 and have built several projects including calculators and interactive math games.
-        I am currently learning advanced Tkinter and NiceGUI, and preparing to explore Django, Flask, and FastAPI.
+</div><section id="about">
+    <div class="section-title">About Me</div>
+    <p style="text-align:center;max-width:700px;margin:auto;">
+        I build modern web applications and love working with Python, JavaScript, and UI design.
     </p>
-</section>
-
-<!-- SKILLS -->
-<section class="section fade-in">
-    <h2>Skills</h2>
-
-    <div class="skills">
-        <div>
-            <h3>Languages</h3>
-            <p>Python, HTML, CSS, JavaScript</p>
-        </div>
-
-        <div>
-            <h3>Frameworks</h3>
-            <p>Tkinter, NiceGUI, Django, Flask, FastAPI</p>
-        </div>
-
-        <div>
-            <h3>Tools</h3>
-            <p>VS Code, GitHub</p>
-        </div>
+</section><section id="projects">
+    <div class="section-title">Projects</div><div class="projects">
+    <div class="card">
+        <h3>School Portal</h3>
+        <a href="https://github.com/active-X1/School-Portal" target="_blank">View Repo</a>
     </div>
-</section>
 
-<!-- PROJECTS -->
-<section class="section fade-in">
-    <h2>Projects</h2>
-
-    <div class="projects">
-
-        <!-- 0-9 Calculator -->
-        <div class="card">
-            <img src="assets/images/calculator.png">
-            <h3>0–9 Digit Calculator</h3>
-            <p>Full calculator supporting digits and arithmetic operations.</p>
-            <a href="https://github.com/active-X1/0-9-digit-cal" target="_blank">View Code</a>
-        </div>
-
-        <!-- Maths Frenzy -->
-        <div class="card">
-            <img src="assets/images/calculator.png">
-            <h3>Maths Frenzy</h3>
-            <p>Interactive math game with multiple difficulty levels.</p>
-            <a href="https://github.com/active-X1/Maths-Frenzy" target="_blank">View Code</a>
-        </div>
-
-        <!-- Two Number -->
-        <div class="card">
-            <img src="assets/images/calculator.png">
-            <h3>Two Number Calculator</h3>
-            <p>Performs operations between two numbers.</p>
-            <a href="https://github.com/active-X1/Tkinter-two-number-calculator-" target="_blank">View Code</a>
-        </div>
-
-        <!-- School Portal -->
-        <div class="card pending">
-            <div class="pending-box">Pending (10%)</div>
-            <h3>School Online Portal</h3>
-            <p>Role-based portal built with Python, FastAPI and NiceGUI.</p>
-            <a href="https://github.com/active-X1/School-Portal" target="_blank">GitHub</a>
-        </div>
-
+    <div class="card">
+        <h3>Maths Frenzy</h3>
+        <a href="https://github.com/active-X1/Maths-Frenzy" target="_blank">View Repo</a>
     </div>
-</section>
 
-<!-- HIRE ME -->
-<section class="section fade-in">
-    <h2>Hire Me</h2>
-    <p>I am open to collaborations, internships, and real-world projects.</p>
-    <a href="mailto:cyrusakacha@gmail.com" class="btn">Contact Me</a>
-</section>
+    <div class="card">
+        <h3>0-9 Digit Calculator</h3>
+        <a href="#" target="_blank">View Repo</a>
+    </div>
+</div>
 
-<!-- CONTACT -->
-<section class="section fade-in">
-    <h2>Contact</h2>
-    <p>Email: cyrusakacha@gmail.com</p>
-    <a href="https://github.com/active-X1" target="_blank">GitHub</a>
-</section>
+</section><section id="contact">
+    <div class="section-title">Contact</div>
+    <p style="text-align:center;">Email: cyrusakacha@gmail.com</p>
+</section><!-- Admin Panel --><div id="adminPanel">
+    <h2>Admin Dashboard</h2>
+    <p>Manage portfolio projects here (demo mode).</p>
+</div><div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p>Project details coming soon.</p>
+    </div>
+</div><footer>
+    © 2026 Cyrus Akacha. All rights reserved.
+</footer><script>
+// Theme toggle
+function toggleTheme(){
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark';
+}
 
-<script src="js/main.js"></script>
-</body>
+// Admin
+function openAdmin(){
+    let pass = prompt("Enter admin password:");
+    if(pass === "admin123"){
+        document.getElementById('adminPanel').style.display='block';
+    }else{
+        alert("Wrong password");
+    }
+}
+
+// Modal
+function openModal(title){
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal(){
+    document.getElementById('modal').style.display = 'none';
+}
+
+// Scroll animation
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('reveal');
+        }
+    });
+});
+cards.forEach(card=>observer.observe(card));
+</script></body>
     </html>
