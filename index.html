@@ -1,615 +1,116 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Cyrus Akacha Cyprian · mobile fixed</title>
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* === RESET + FIXES === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyrus Akacha Portfolio</title>
 
-        body {
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.5;
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        /* header */
-        .main-header {
-            background: #ffffff;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            border-bottom: 3px solid #1cc88a;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 900;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            min-height: 100px;
-        }
-
-        .header-name {
-            font-size: clamp(1.3rem, 5vw, 2rem);
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        .header-name span {
-            color: #1cc88a;
-        }
-
-        .header-subtitle {
-            color: #475569;
-            font-size: 0.85rem;
-        }
-        
-        .header-note {
-            color: #64748b;
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
-            font-style: italic;
-        }
-
-        /* main content spacing */
-        .main-content {
-            width: 100%;
-            margin-top: 110px;
-            padding: 0;
-        }
-
-        /* ===== SIMPLE MENU TOGGLE ===== */
-        .menu-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 50px;
-            height: 50px;
-            background: #1cc88a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            border: 2px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .menu-toggle i {
-            font-size: 24px;
-            color: white;
-            pointer-events: none;
-        }
-
-        /* SIMPLE SIDEBAR */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            z-index: 1100;
-            padding: 2rem 1.5rem;
-            transition: right 0.3s ease;
-            border-left: 3px solid #1cc88a;
-            overflow-y: auto;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-        }
-
-        .sidebar.active {
-            right: 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .sidebar-header h3 {
-            color: #1cc88a;
-            font-size: 1.8rem;
-        }
-
-        .close-sidebar {
-            width: 40px;
-            height: 40px;
-            background: #f1f5f9;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            color: #1cc88a;
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .sidebar-nav a {
-            text-decoration: none;
-            color: #334155;
-            font-size: 1.2rem;
-            font-weight: 600;
-            padding: 0.8rem 1rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: #f8fafc;
-            transition: all 0.2s;
-        }
-
-        .sidebar-nav a i {
-            width: 24px;
-            color: #1cc88a;
-        }
-
-        .sidebar-nav a:active {
-            background: #1cc88a;
-            color: white;
-        }
-        .sidebar-nav a:active i {
-            color: white;
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 1rem 0;
-        }
-
-        /* overlay */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1050;
-            display: none;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        /* HERO section */
-        .hero {
-            padding: 2rem 1.2rem;
-            text-align: center;
-            background: linear-gradient(145deg, #ffffff, #f8fafc);
-        }
-
-        #typing {
-            font-size: clamp(1.8rem, 7vw, 2.8rem);
-            font-weight: 700;
-            color: #0f172a;
-            border-right: 4px solid #1cc88a;
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            max-width: 100%;
-            animation: blink 1s step-end infinite;
-            margin-bottom: 0.5rem;
-        }
-
-        @keyframes blink {
-            0%, 100% { border-color: #1cc88a; }
-            50% { border-color: transparent; }
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #475569;
-            margin: 0.5rem 0 1.5rem;
-        }
-
-        .photo-container {
-            margin: 1.5rem auto 0;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1cc88a, #0f172a);
-            padding: 5px;
-            box-shadow: 0 15px 25px -10px rgba(28,200,138,0.5);
-        }
-
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            background: #f1f5f9;
-            display: block;
-        }
-
-        /* sections */
-        section {
-            padding: 2.5rem 1rem;
-            background: white;
-            border-bottom: 1px solid #eef2f6;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: #1cc88a;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: #1cc88a;
-            margin: 0.6rem auto 0;
-        }
-
-        /* grids */
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 640px) {
-            .button-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .grid-btn {
-            background: white;
-            padding: 1.2rem 0.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 16px -8px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 1px solid rgba(28,200,138,0.2);
-        }
-
-        .grid-btn i {
-            font-size: 36px;
-            color: #1cc88a;
-            margin-bottom: 0.5rem;
-        }
-
-        .grid-btn p {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 0.9rem;
-        }
-
-        .grid-btn a {
-            text-decoration: none;
-            color: #1cc88a;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-top: 0.5rem;
-            padding: 0.2rem 1rem;
-            background: rgba(28,200,138,0.1);
-            border-radius: 20px;
-            transition: all 0.2s;
-        }
-
-        .grid-btn a:active {
-            background: #1cc88a;
-            color: white;
-        }
-
-        .in-progress {
-            color: #f97316;
-            font-size: 0.75rem;
-            background: rgba(249,115,22,0.1);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 0.3rem;
-        }
-
-        /* social grid */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 640px) {
-            .social-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        .social-item {
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .social-icon {
-            width: 55px;
-            height: 55px;
-            margin: 0 auto 0.5rem;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: #1cc88a;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 2px solid rgba(28,200,138,0.2);
-        }
-
-        .social-name {
-            color: #334155;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            background: white;
-            color: #64748b;
-            border-top: 1px solid #e2e8f0;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Fixed Header -->
-    <header class="main-header">
-        <h1 class="header-name">
-            <span>Cyrus Akacha Cyprian</span>
-        </h1>
-        <div class="header-subtitle">Full Stack Developer & Creative Technologist</div>
-        <div class="header-note">
-            Passionate Python developer, building desktop, mobile and web apps
-        </div>
-    </header>
 
-    <!-- SIMPLE Menu Button -->
-    <div class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
+<!-- HEADER -->
+<header class="header">
+    <h1>Cyrus Akacha</h1>
+
+    <div class="header-controls">
+        <button id="darkToggle">🌙</button>
     </div>
+</header>
 
-    <!-- Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- HERO -->
+<section class="hero">
+    <h2 id="typing"></h2>
+    <p>Python Developer | Software • Automation • Web</p>
+</section>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h3>Cyrus</h3>
-            <div class="close-sidebar" id="closeSidebar">
-                <i class="fas fa-times"></i>
-            </div>
+<!-- ABOUT -->
+<section class="section fade-in">
+    <h2>About Me</h2>
+    <p>
+        My name is Cyrus Akacha Cyprian, a passionate Python developer specializing in software development, web development, and automation.
+        I began programming in September 2025 and have built several projects including calculators and interactive math games.
+        I am currently learning advanced Tkinter and NiceGUI, and preparing to explore Django, Flask, and FastAPI.
+    </p>
+</section>
+
+<!-- SKILLS -->
+<section class="section fade-in">
+    <h2>Skills</h2>
+
+    <div class="skills">
+        <div>
+            <h3>Languages</h3>
+            <p>Python, HTML, CSS, JavaScript</p>
         </div>
-        <div class="sidebar-nav">
-            <a href="#home" class="sidebar-link"><i class="fas fa-home"></i> Home</a>
-            <a href="#tools" class="sidebar-link"><i class="fas fa-tools"></i> My Tools</a>
-            <a href="#learning" class="sidebar-link"><i class="fas fa-book-open"></i> Currently Learning</a>
-            <a href="#projects" class="sidebar-link"><i class="fas fa-code-branch"></i> Projects</a>
-            <a href="#contact" class="sidebar-link"><i class="fas fa-address-book"></i> Social</a>
-            
-            <div class="sidebar-divider"></div>
-            
-            <a href="https://wa.me/2348066761823" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="https://github.com/akachacyrus09-crypto" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+
+        <div>
+            <h3>Frameworks</h3>
+            <p>Tkinter, NiceGUI, Django, Flask, FastAPI</p>
+        </div>
+
+        <div>
+            <h3>Tools</h3>
+            <p>VS Code, GitHub</p>
         </div>
     </div>
+</section>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <!-- Hero -->
-        <section id="home">
-            <h2 id="typing"></h2>
-            <p>“Where code meets creativity”</p>
+<!-- PROJECTS -->
+<section class="section fade-in">
+    <h2>Projects</h2>
 
-            <div class="photo-container">
-                <img src="images/profile.jpg" 
-                     alt="Cyrus Akacha Cyprian" 
-                     class="profile-photo" 
-                     id="profilePhoto"
-                     onerror="this.src='https://via.placeholder.com/250'">
-            </div>
-        </section>
+    <div class="projects">
 
-        <!-- Tools -->
-        <section id="tools">
-            <h2 class="section-title">⚙️ My Tools</h2>
-            <div class="button-grid">
-                <div class="grid-btn"><i class="fab fa-python"></i><p>Python</p></div>
-                <div class="grid-btn"><i class="fas fa-puzzle-piece"></i><p>NiceGUI</p></div>
-                <div class="grid-btn"><i class="fas fa-window-maximize"></i><p>Tkinter</p></div>
-                <div class="grid-btn"><i class="fas fa-calculator"></i><p>Mathematics</p></div>
-            </div>
-        </section>
+        <!-- 0-9 Calculator -->
+        <div class="card">
+            <img src="assets/images/calculator.png">
+            <h3>0–9 Digit Calculator</h3>
+            <p>Full calculator supporting digits and arithmetic operations.</p>
+            <a href="https://github.com/active-X1/0-9-digit-cal" target="_blank">View Code</a>
+        </div>
 
-        <!-- Learning -->
-        <section id="learning">
-            <h2 class="section-title">📚 Currently Learning</h2>
-            <div class="button-grid">
-                <div class="grid-btn"><i class="fab fa-html5"></i><p>HTML</p></div>
-                <div class="grid-btn"><i class="fab fa-js"></i><p>JavaScript</p></div>
-                <div class="grid-btn"><i class="fab fa-vuejs"></i><p>Vue.js</p></div>
-                <div class="grid-btn"><i class="fas fa-paint-brush"></i><p>Custom Tkinter</p></div>
-                <div class="grid-btn"><i class="fas fa-cogs"></i><p>NiceGUI Adv</p></div>
-            </div>
-        </section>
+        <!-- Maths Frenzy -->
+        <div class="card">
+            <img src="assets/images/calculator.png">
+            <h3>Maths Frenzy</h3>
+            <p>Interactive math game with multiple difficulty levels.</p>
+            <a href="https://github.com/active-X1/Maths-Frenzy" target="_blank">View Code</a>
+        </div>
 
-        <!-- Projects -->
-        <section id="projects">
-            <h2 class="section-title">💻 Projects</h2>
-            <div class="button-grid">
-                <!-- UPDATED: Two Number Calculator with your GitHub repo link -->
-                <div class="grid-btn">
-                    <p>Two Number Calculator</p>
-                    <a href="https://github.com/akachacyrus09-crypto/python-two-number-calculator-.git" target="_blank"><i class="fab fa-github"></i> View Code</a>
-                </div>
-                <div class="grid-btn">
-                    <p>Tkinter App</p>
-                    <a href="#"><i class="fab fa-github"></i> Source</a>
-                </div>
-                <div class="grid-btn">
-                    <p>School Portal</p>
-                    <span class="in-progress"><i class="fas fa-clock"></i> In Progress</span>
-                </div>
-            </div>
-        </section>
+        <!-- Two Number -->
+        <div class="card">
+            <img src="assets/images/calculator.png">
+            <h3>Two Number Calculator</h3>
+            <p>Performs operations between two numbers.</p>
+            <a href="https://github.com/active-X1/Tkinter-two-number-calculator-" target="_blank">View Code</a>
+        </div>
 
-        <!-- Social -->
-        <section id="contact">
-            <h2 class="section-title">📡 Social Frequency</h2>
-            <div class="social-grid">
-                <a href="https://wa.me/2348066761823" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-whatsapp"></i></div>
-                    <span class="social-name">WhatsApp</span>
-                </a>
-                <a href="https://github.com/akachacyrus09-crypto" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-github"></i></div>
-                    <span class="social-name">GitHub</span>
-                </a>
-                <a href="#" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
-                    <span class="social-name">LinkedIn</span>
-                </a>
-                <a href="https://www.facebook.com/cyrusakacha01" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
-                    <span class="social-name">Facebook</span>
-                </a>
-                <a href="https://medium.com/@akachacyrus09" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-medium"></i></div>
-                    <span class="social-name">Medium</span>
-                </a>
-                <a href="https://x.com/akachacyrus" target="_blank" class="social-item">
-                    <div class="social-icon"><i class="fab fa-x-twitter"></i></div>
-                    <span class="social-name">X</span>
-                </a>
-            </div>
-        </section>
+        <!-- School Portal -->
+        <div class="card pending">
+            <div class="pending-box">Pending (10%)</div>
+            <h3>School Online Portal</h3>
+            <p>Role-based portal built with Python, FastAPI and NiceGUI.</p>
+            <a href="https://github.com/active-X1/School-Portal" target="_blank">GitHub</a>
+        </div>
 
-        <footer>
-            <p>© <span id="currentYear"></span> Cyrus Akacha Cyprian</p>
-        </footer>
     </div>
+</section>
 
-    <script>
-        // SUPER SIMPLE SIDEBAR TOGGLE
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            const closeBtn = document.getElementById('closeSidebar');
-            
-            // Open sidebar
-            if (menuToggle) {
-                menuToggle.onclick = function() {
-                    sidebar.classList.add('active');
-                    overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                };
-            }
-            
-            // Close sidebar function
-            function closeSidebar() {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            
-            // Close button
-            if (closeBtn) {
-                closeBtn.onclick = closeSidebar;
-            }
-            
-            // Overlay click
-            if (overlay) {
-                overlay.onclick = closeSidebar;
-            }
-            
-            // Handle internal links only
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.onclick = function(e) {
-                    const href = this.getAttribute('href');
-                    if (href.startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = href.substring(1);
-                        const targetEl = document.getElementById(targetId);
-                        if (targetEl) {
-                            window.scrollTo({
-                                top: targetEl.offsetTop - 110,
-                                behavior: 'smooth'
-                            });
-                        }
-                        closeSidebar();
-                    }
-                };
-            });
-            
-            // Typing effect
-            const typingEl = document.getElementById('typing');
-            if (typingEl) {
-                const phrases = ['Cyrus Akacha', 'Developer', 'Creator', 'Problem Solver', 'Python Programmer'];
-                let idx = 0, charIdx = 0, isDeleting = false;
-                
-                function typeEffect() {
-                    const current = phrases[idx];
-                    typingEl.textContent = isDeleting ? 
-                        current.substring(0, charIdx - 1) : 
-                        current.substring(0, charIdx + 1);
-                    
-                    charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
-                    
-                    if (!isDeleting && charIdx === current.length) {
-                        isDeleting = true;
-                        setTimeout(typeEffect, 1500);
-                    } else if (isDeleting && charIdx === 0) {
-                        isDeleting = false;
-                        idx = (idx + 1) % phrases.length;
-                        setTimeout(typeEffect, 200);
-                    } else {
-                        setTimeout(typeEffect, isDeleting ? 50 : 100);
-                    }
-                }
-                typeEffect();
-            }
-            
-            // Current year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Image fallback
-            const profileImg = document.getElementById('profilePhoto');
-            if (profileImg) {
-                profileImg.onerror = function() {
-                    this.src = 'https://via.placeholder.com/250';
-                };
-            }
-        });
-    </script>
+<!-- HIRE ME -->
+<section class="section fade-in">
+    <h2>Hire Me</h2>
+    <p>I am open to collaborations, internships, and real-world projects.</p>
+    <a href="mailto:cyrusakacha@gmail.com" class="btn">Contact Me</a>
+</section>
+
+<!-- CONTACT -->
+<section class="section fade-in">
+    <h2>Contact</h2>
+    <p>Email: cyrusakacha@gmail.com</p>
+    <a href="https://github.com/active-X1" target="_blank">GitHub</a>
+</section>
+
+<script src="js/main.js"></script>
 </body>
-</html>
+    </html>
